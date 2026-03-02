@@ -1,0 +1,8 @@
+# Secrets
+config/db.php
+
+# Logs
+*.log
+
+# Uploads (optional, can be big)
+uploads/

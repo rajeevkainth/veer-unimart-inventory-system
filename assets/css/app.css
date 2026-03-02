@@ -1,0 +1,231 @@
+:root{
+  --g:#1F7A3F; --g2:#14532D;
+  --bg:#f7faf7; --card:#fff; --line:#e5e7eb;
+  --text:#0f172a; --muted:#64748b;
+  --shadow:0 10px 30px rgba(2,6,23,.08);
+  --shadow2:0 6px 18px rgba(2,6,23,.10);
+  --r:16px; --r2:12px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* Layout */
+.app{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  min-height:100vh;
+}
+.sidebar{
+  background:#ffffff;
+  border-right:1px solid var(--line);
+  padding:18px 14px;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.topbar{
+  background:#ffffff;
+  border-bottom:1px solid var(--line);
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.content{
+  padding:18px;
+}
+.container{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* Brand */
+.brand{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 8px 14px;
+}
+.brand .dot{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--g);
+  box-shadow:0 0 0 5px rgba(31,122,63,.12);
+}
+.brand .title{
+  font-weight:900; letter-spacing:.2px;
+}
+.brand .sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+/* Sidebar menu */
+.menu{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  text-decoration:none;
+  color:var(--text);
+  border:1px solid transparent;
+}
+.nav-item:hover{
+  background:#fbfdfb;
+  border-color:#eef2f7;
+}
+.nav-item.active{
+  background:rgba(31,122,63,.10);
+  border-color:rgba(31,122,63,.25);
+}
+.nav-ico{
+  width:34px;height:34px;border-radius:12px;
+  display:grid;place-items:center;
+  background:#f1faf4;
+  border:1px solid #e3f3e7;
+  color:var(--g2);
+  flex:0 0 auto;
+}
+.nav-item.active .nav-ico{
+  background:rgba(31,122,63,.14);
+  border-color:rgba(31,122,63,.25);
+}
+.nav-text{font-weight:700}
+.nav-hint{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* Topbar */
+.search{
+  flex:1;
+  max-width:520px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fbfdfb;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 14px;
+}
+.search input{
+  border:0; outline:0;
+  background:transparent;
+  width:100%;
+  font-size:14px;
+}
+.btn{
+  border:1px solid var(--line);
+  background:#fff;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:var(--shadow2);
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--g),var(--g2));
+  color:#fff;
+  border-color:rgba(0,0,0,.05);
+}
+.btn-group{display:flex; gap:8px; align-items:center}
+
+/* Cards + tables */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:14px;
+}
+.kpi{grid-column:span 4;}
+.kpi .label{color:var(--muted);font-size:12px}
+.kpi .val{font-size:26px;font-weight:900;margin-top:6px;color:var(--g2)}
+.section{grid-column:span 6;}
+.section h2{font-size:14px;margin:0 0 10px 0;color:var(--g2)}
+.card table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:10px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:700;background:#fbfdfb}
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#eaf7ef;color:var(--g2);font-weight:900;font-size:12px}
+.muted{color:var(--muted)}
+
+/* Responsive */
+@media (max-width: 980px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto}
+  .kpi{grid-column:span 12}
+  .section{grid-column:span 12}
+  .search{max-width:100%}
+}
+/* ===== FIX: Sticky Topbar always on top ===== */
+.sidebar{ z-index: 50; }
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: #f6fbf6;          /* theme */
+  box-shadow: 0 10px 22px rgba(2,6,23,.06);
+  backdrop-filter: blur(6px);
+}
+
+/* ✅ IMPORTANT: do not give z-index to cards/content */
+.content, .container, .card, .table-wrap{
+  position: relative;
+  z-index: auto;
+}
+
+/* prevent table header from painting above topbar */
+table, thead, th{
+  position: relative;
+  z-index: 0;
+}
+
+/* ===== FIX: Cards overlapping each other in .two grid ===== */
+.two{ 
+  align-items: start;
+}
+
+.two > .card{
+  position: relative;
+  z-index: 1;
+}
+
+.two > .card:last-child{
+  z-index: 2;                 /* product list card */
+}
+
+/* keep table inside its own card, never cover other card */
+.table-wrap{
+  position: relative;
+  z-index: 0;
+}
+
+/* IMPORTANT for CSS grid: prevent overflow overlap */
+.main, .content, .container{
+  min-width: 0;
+}
